@@ -1,5 +1,22 @@
 package pages;
 
-public class CartSummaryPage {
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+public class CartSummaryPage extends BasicPage {
+
+	public CartSummaryPage(WebDriver driver, JavascriptExecutor js) {
+		super(driver, js);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public WebElement getClearAllButton() {
+		return this.driver.findElement(By.linkText("Clear All"));
+	}
+	
+	public void removeAllFromCart() {
+		this.getClearAllButton().click();
+	}
 }
