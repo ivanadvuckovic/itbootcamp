@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
@@ -10,7 +11,6 @@ public abstract class BasicPage {
 	public BasicPage(WebDriver driver, JavascriptExecutor js) {
 		this.driver = driver;
 		this.js = js;
-	}
-	
+	}	
 	
 }
