@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class ProfilePage extends BasicPage{
 
@@ -46,19 +47,22 @@ public class ProfilePage extends BasicPage{
 		return this.driver.findElement(By.xpath("//input[@name=\"user_phone\"]"));
 	}
 	
-	public WebElement getCountry() {
+	public Select getCountry() {
 		WebElement selectElement = driver.findElement(By.id("user_country_id"));
-		return selectElement;
+		Select select = new Select(selectElement);
+		return select;
 	}
 	
-	public WebElement getState() {
+	public Select getState() {
 		WebElement selectElement = driver.findElement(By.id("user_state_id"));
-		return selectElement;
+		Select select = new Select(selectElement);
+		return select;
 	}
 
-	public WebElement getCity() {
+	public Select getCity() {
 		WebElement selectElement = driver.findElement(By.id("user_city"));
-		return selectElement;
+		Select select = new Select(selectElement);
+		return select;
 	}
 	
 	public WebElement getZipCode() {
