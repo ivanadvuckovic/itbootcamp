@@ -36,7 +36,7 @@ public class NotificationSystemPage extends BasicPage {
 	
 	public void isAlertDisplayed() {
 		WebDriverWait w = new WebDriverWait(this.driver, 3);
-	    w.until(ExpectedConditions.presenceOfElementLocated (By.xpath("//*contains(@style, 'display: block	')")));
+	    w.until(ExpectedConditions.presenceOfElementLocated (By.xpath("//*contains(@style, 'display: none')")));
 	}
 	
 	public boolean elementExist(By by) {
