@@ -24,5 +24,17 @@ public class MealItemTest extends BasicTest{
 		Thread.sleep(2000);
 		Assert.assertTrue(nsp.getAlertText().contains("Meal Added To Cart"), "Meal Added To Cart message not disaplyed");
 	}
+	
+	@Test
+	public void addMealToFavourite() throws InterruptedException {
+		driver.get(this.baseUrl + "meal/lobster-shrimp-chicken-quesadilla-combo");
+		lcp.closePopup();
+		mealPage.addToFavourite();
+		Assert.assertTrue(nsp.getAlertText().contains("Please login first!"), "Please login first! message not disaplyed");
+		loginPage.login(this.userName, this.password);
+		driver.navigate().to(this.baseUrl + "meal/lobster-shrimp-chicken-quesadilla-combo");
+		mealPage.addToFavourite();
+		Assert.assertTrue(nsp.getAlertText().contains("Product has been added to your favorites."), "Product has been added to your favorites. message not disaplyed");
+	}
 
 }
