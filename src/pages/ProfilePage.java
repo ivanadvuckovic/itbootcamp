@@ -1,26 +1,35 @@
 package pages;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.interactions.Actions;
 
 public class ProfilePage extends BasicPage {
-
+	Actions actions = new Actions(driver);
+	
 	public ProfilePage(WebDriver driver, JavascriptExecutor js, WebDriverWait waiter) {
 		super(driver, js, waiter);
 	}
-
-	public void getUploadImageButton() {
-		WebElement button = this.driver.findElement(By.xpath("//a[@title=\"Upload\"]"));
-		js.executeScript("arguments[0].click();", button);
+	
+	public void getUploadImageButton() throws InterruptedException {
+		WebElement avatar = this.driver.findElement(By.className("avatar"));
+    	actions.moveToElement(avatar).build().perform();
+		WebElement uploadButton = this.driver.findElement(By.xpath("//div[@class=\"hover-elemnts\"]/a"));
+		waiter.until(ExpectedConditions.elementToBeClickable(uploadButton));
+		js.executeScript("arguments[0].click();", uploadButton);
 	}
 
-	public void sendImage() {
-		this.driver.findElement(By.xpath("//input[@type='file']")).sendKeys("img/avatar.png");
-
+	public void sendImage(String path) throws IOException {
+		String imgPath = new File(path).getCanonicalPath();
+		this.driver.findElement(By.xpath("//input[@type='file']")).sendKeys(imgPath);
 	}
 
 	public void deleteImage() {
