@@ -4,15 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AuthPage extends BasicPage {
 
-	public AuthPage(WebDriver driver, JavascriptExecutor js) {
-		super(driver, js);
+	public AuthPage(WebDriver driver, JavascriptExecutor js, WebDriverWait waiter) {
+		super(driver, js, waiter);
 	}
 	
 	public WebElement getAccountNameButton() {
-		return this.driver.findElement(By.xpath("//div[@class=\"accounts-link\"]/ul/li/a"));
+		return this.driver.findElement(By.className("accounts-link"));
 	}
 	
 	public WebElement getMyAccountLink() {

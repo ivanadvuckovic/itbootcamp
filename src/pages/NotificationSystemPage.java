@@ -11,8 +11,8 @@ import org.testng.Assert;
 
 public class NotificationSystemPage extends BasicPage {
 
-	public NotificationSystemPage(WebDriver driver, JavascriptExecutor js) {
-		super(driver, js);
+	public NotificationSystemPage(WebDriver driver, JavascriptExecutor js, WebDriverWait waiter) {
+		super(driver, js, waiter);
 	}
 
 	public WebElement getAlertMessage() {
@@ -24,19 +24,16 @@ public class NotificationSystemPage extends BasicPage {
 		String alertText = "";
 		boolean alertExists = this.elementExist(By.xpath("//*[contains(@class, 'alert--success') or contains(@class, 'alert--danger')][contains(@style,'display: block')]"));
 		Assert.assertTrue(alertExists, "Message is not displayed.");
-		boolean alertDanger = this.elementExist(By.xpath("//*[contains(@class, 'alert--danger')"));
 		if (alertExists) {
-//			if (alertDanger) {
-//				this.driver.findElement(By.className("div_error"));
-//			}
 			alertText = this.driver.findElement(By.className("content")).getText();
 		}
 		return alertText;
 	}
 	
-	public void isAlertDisplayed() {
+	public void waitMsgToDissapear() {
 		WebDriverWait w = new WebDriverWait(this.driver, 3);
-	    w.until(ExpectedConditions.presenceOfElementLocated (By.xpath("//*contains(@style, 'display: none')")));
+		WebElement msg = this.driver.findElement(By.xpath("//*[contains(@class, 'system_message')]"));
+	    w.until(ExpectedConditions.attributeToBe(msg, "style", "display: none;"));
 	}
 	
 	public boolean elementExist(By by) {

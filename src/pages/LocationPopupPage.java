@@ -2,14 +2,15 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LocationPopupPage extends BasicPage {
 
-	public LocationPopupPage(WebDriver driver, JavascriptExecutor js) {
-		super(driver, js);
-		js = (JavascriptExecutor) driver;
+	public LocationPopupPage(WebDriver driver, JavascriptExecutor js, WebDriverWait waiter) {
+		super(driver, js, waiter);
 	}
 
 	public WebElement getLocation() {
@@ -17,9 +18,14 @@ public class LocationPopupPage extends BasicPage {
 	}
 	
 	public WebElement getCloseLocation() {
-		WebElement locationDiv = this.driver.findElement(By.id("location-popup"));
-		WebElement close = locationDiv.findElement(By.className("close-btn-white"));
+//		WebElement locationDiv = this.driver.findElement(By.id("location-popup"));
+		boolean exists = this.existsElement(By.className("location-search"));
+		WebElement close = this.driver.findElement(By.className("close-btn"));
 		return close;
+	}
+	
+	public void closePopup() {
+		js.executeScript("arguments[0].click()", this.getCloseLocation());
 	}
 	
 	public String getKeyword() {
@@ -45,6 +51,15 @@ public class LocationPopupPage extends BasicPage {
 		js.executeScript("arguments[0].value=arguments[1]", this.getLocationInput(), inuptValue);
 		js.executeScript("arguments[0].click();", this.getSubmit());
 		this.getCloseLocation().click();
+	}
+	
+	private boolean existsElement(By by) {
+	    try {
+	        driver.findElement(by);
+	    } catch (NoSuchElementException e) {
+	        return false;
+	    }
+	    return true;
 	}
 
 }
