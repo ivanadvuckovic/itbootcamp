@@ -24,6 +24,8 @@ public class NotificationSystemPage extends BasicPage {
 		String alertText = "";
 		boolean alertExists = this.elementExist(By.xpath("//*[contains(@class, 'alert--success') or contains(@class, 'alert--danger')][contains(@style,'display: block')]"));
 		Assert.assertTrue(alertExists, "Message is not displayed.");
+		alertText = this.driver.findElement(By.className("content")).getText();
+		boolean alertDanger = this.elementExist(By.xpath("//*[contains(@class, 'alert--danger')"));
 		if (alertExists) {
 			alertText = this.driver.findElement(By.className("content")).getText();
 		}
