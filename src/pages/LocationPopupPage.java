@@ -15,13 +15,13 @@ public class LocationPopupPage extends BasicPage {
 	}
 
 	public WebElement getLocation() {
-		return this.driver.findElement(By.linkText("Select Location"));
+		return this.driver.findElement(By.xpath("//div[@class=\"location-selector\"]/a"));
 	}
 	
 	public WebElement getCloseLocation() {
 //		WebElement locationDiv = this.driver.findElement(By.id("location-popup"));
 		boolean exists = this.existsElement(By.className("location-search"));
-		WebElement close = this.driver.findElement(By.className("close-btn"));
+		WebElement close = this.driver.findElement(By.xpath("//a[@class=\"close-btn close-btn-white\"]"));
 		return close;
 	}
 	
@@ -48,7 +48,6 @@ public class LocationPopupPage extends BasicPage {
 	}
 	
 	public void setLocation(String locationName) throws InterruptedException {
-		this.getLocation().click();
 		this.getKeyword().click();
 		WebElement li = this.getLocationItem(locationName);
 		int value = Integer.parseInt(li.getAttribute("data-value"));

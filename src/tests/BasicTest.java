@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 
 import pages.AuthPage;
+import pages.CartSummaryPage;
 import pages.LocationPopupPage;
 import pages.LoginPage;
 import pages.MealPage;
@@ -35,6 +36,7 @@ public abstract class BasicTest {
 	protected AuthPage authPage;
 	protected ProfilePage profilePage;
 	protected LocationPopupPage lcp;
+	protected CartSummaryPage csp;
 	
 	@BeforeMethod
 	public void setup() {
@@ -53,6 +55,7 @@ public abstract class BasicTest {
 		authPage = new AuthPage(driver, js, waiter);
 		profilePage = new ProfilePage(driver, js, waiter);
 		lcp = new LocationPopupPage(driver, js, waiter);
+		csp = new CartSummaryPage(driver, js, waiter);
 	}
 	
 	

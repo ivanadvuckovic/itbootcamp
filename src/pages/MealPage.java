@@ -25,7 +25,7 @@ public class MealPage extends BasicPage {
 	public void getAddtoCart(String qauntity) {
 		this.getQuantity().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
 		this.getQuantity().sendKeys(qauntity);
-		this.getAddCartButton().click();
+		js.executeScript("arguments[0].click()", this.getAddCartButton());
 	}
 	
 	public void addToFavourite() {
